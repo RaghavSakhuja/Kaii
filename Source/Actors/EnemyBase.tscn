@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Source/Actors/Entity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/enemy.png" type="Texture" id=2]
+[ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Source/Actors/EnemyBase.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 46.3897
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 51.1566
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 47.0106
+
+[node name="EnemyBase" instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource( 4 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" parent="." index="2"]
+anims/idle = SubResource( 2 )
+
+[node name="Hurtbox" parent="." index="3"]
+collision_layer = 4
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource( 3 )
+
+[node name="Hitbox" parent="." index="4" instance=ExtResource( 3 )]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 4 )
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]

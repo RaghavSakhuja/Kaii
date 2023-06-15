@@ -10,12 +10,12 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody2D",
-"class": "Actor",
+"class": "Entity",
 "language": "GDScript",
-"path": "res://Source/Actors/Actor.gd"
+"path": "res://Source/Actors/Entity.gd"
 } ]
 _global_script_class_icons={
-"Actor": ""
+"Entity": ""
 }
 
 [application]
@@ -60,10 +60,12 @@ move_down={
 
 [layer_names]
 
-2d_physics/layer_1="player"
-2d_physics/layer_2="enemies"
-2d_physics/layer_3="coins"
-2d_physics/layer_4="world"
+2d_physics/layer_1="environments"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemies"
+2d_physics/layer_4="hurdles"
+2d_physics/layer_5="projectiles"
+2d_physics/layer_6="objects"
 
 [physics]
 

@@ -1,4 +1,5 @@
-extends "res://Source/Actors/Actor.gd"
+extends Entity
+
 
 func _ready():
 	_velocity.x=speed
