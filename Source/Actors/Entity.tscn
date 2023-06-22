@@ -15,6 +15,7 @@ root_node = NodePath("../CollisionShape2D")
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
 
+[connection signal="died" from="." to="." method="_on_Entity_died"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="Hurtbox"]

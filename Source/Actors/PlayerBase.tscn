@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Source/Actors/Entity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Source/Actors/PlayerBase.gd" type="Script" id=2]
 [ext_resource path="res://assets/playeridle.png" type="Texture" id=3]
 [ext_resource path="res://assets/playermove.png" type="Texture" id=4]
 [ext_resource path="res://assets/playerjump.png" type="Texture" id=5]
+[ext_resource path="res://Source/Objects/Projectiles/body_bullet.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 12.0416
@@ -49,6 +50,50 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 5 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Sprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "drying_1"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.647059, 0.647059, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "drying_2"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.647059, 0.647059, 1 ), Color( 0.596078, 0.333333, 0.333333, 1 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -133,6 +178,38 @@ tracks/2/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
+[sub_resource type="Animation" id=13]
+resource_name = "rejuvination_1"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.647059, 0.647059, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "rejuvination_2"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.596078, 0.333333, 0.333333, 1 ), Color( 1, 0.647059, 0.647059, 1 ) ]
+}
+
 [sub_resource type="Animation" id=6]
 resource_name = "run"
 length = 0.7
@@ -187,39 +264,52 @@ height = 48.0
 collision_layer = 2
 collision_mask = 13
 script = ExtResource( 2 )
+limit = 2
+currcount = 2
+B_Bullet = ExtResource( 6 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
 hframes = 5
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="." index="1"]
+visible = false
 position = Vector2( 23, 23 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="." index="2"]
+visible = false
 position = Vector2( 23, -19 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="." index="3"]
+visible = false
 position = Vector2( -23, 23 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="4"]
+visible = false
 position = Vector2( -25, -19 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D" parent="." index="5"]
+visible = false
 position = Vector2( 0, 2.5 )
 shape = SubResource( 5 )
 
 [node name="AnimationPlayer" parent="." index="6"]
 autoplay = "idle"
 anims/RESET = SubResource( 3 )
+anims/drying_1 = SubResource( 11 )
+anims/drying_2 = SubResource( 12 )
 anims/idle = SubResource( 2 )
 anims/jump = SubResource( 7 )
+anims/rejuvination_1 = SubResource( 13 )
+anims/rejuvination_2 = SubResource( 14 )
 anims/run = SubResource( 6 )
 
 [node name="Hurtbox" parent="." index="7"]
+visible = false
 collision_layer = 2
 collision_mask = 12
 
@@ -233,5 +323,7 @@ shape = SubResource( 9 )
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Hurtbox" index="2"]
 position = Vector2( 24, 1 )
 shape = SubResource( 10 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="Hurtbox"]

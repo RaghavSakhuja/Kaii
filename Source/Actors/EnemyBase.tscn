@@ -18,9 +18,11 @@ radius = 51.1566
 radius = 47.0106
 
 [node name="EnemyBase" instance=ExtResource( 1 )]
+scale = Vector2( 0.5, 0.5 )
 collision_layer = 4
-collision_mask = 7
+collision_mask = 23
 script = ExtResource( 4 )
+speed = 250
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
@@ -41,6 +43,7 @@ shape = SubResource( 3 )
 [node name="Hitbox" parent="." index="4" instance=ExtResource( 3 )]
 collision_layer = 4
 collision_mask = 2
+damage = 55
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 4 )
