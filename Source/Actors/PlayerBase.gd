@@ -14,33 +14,33 @@ func get_input_dir()->Vector2:
 	return new_velocity
 	
 func _physics_process(delta:float)->void:
+	#print(_velocity)
 	var dir:=Vector2.ZERO
 	dir.x=get_input_dir().x
 	if dir!=Vector2.ZERO:
 		if(is_on_floor() or is_on_wall() or is_on_ceiling()):
 			accelarate(dir)
-			if(dir.x<0):
-				sprite.scale.x=-1;
-				facing=-1;
-			else:
-				sprite.scale.x=1;
-				facing=1
-			if start_new_anim:	
-				start_new_anim=0
-				animPlayer.play("run")
-			
-		#else:
-			#animPlayer.play("idle")
 	else:
-		if start_new_anim:	
-			start_new_anim=0
-			animPlayer.play("idle")
-		#print("idle")
 		if(is_on_floor() or is_on_ceiling() or is_on_wall()):
 			apply_friction()
 	
 	if(Input.is_action_just_pressed("fire")):
 		throw()
+	
+	if (_velocity.x!=0 && is_on_floor()):	
+		if(_velocity.x<0):
+			sprite.scale.x=-1;
+			facing=-1;
+		else:
+			sprite.scale.x=1;
+			facing=1			
+		if start_new_anim:	
+			animPlayer.play("run")
+	else:
+		if start_new_anim:
+			animPlayer.play("idle")
+		
+
 	move()
 
 func accelarate(dir:Vector2):
@@ -50,13 +50,7 @@ func move():
 	apply_grav()
 	if(Input.is_action_just_pressed("move_up") && (is_on_floor())):
 		_velocity.y=-speed
-#		if start_new_anim:	
-#			start_new_anim=0
-#			animPlayer.play("jump")		
 		print("jumped1")
-	
-		
-	
 	_velocity = move_and_slide(_velocity,FLOOR_NORMAL)
 
 func apply_friction():
@@ -74,10 +68,9 @@ func throw():
 			direction.x=facing;
 		_velocity+=direction*speed
 		_velocity.x=clamp(_velocity.x,-600,600)
-		print(direction)		
 		bullet.rotation=(-1*direction).angle()
-		print(currcount)
 		animPlayer.play("drying_"+str(3-currcount))
+		start_new_anim=0;
 		speed+=50
 		friction-=10
 		currcount-=1

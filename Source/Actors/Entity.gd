@@ -5,14 +5,18 @@ class_name Entity
 #signal hp_reduced(new_hp)
 signal died
 
+
 const FLOOR_NORMAL=Vector2.UP
 export(int) var Gravity=1000
 export(int) var ACC=40
 export(int) var speed=500
 export(int) var friction=50
-export(int) var hp_max=100
+export(int) var hp_max=1000
 export(int) var hp= hp_max setget set_hp,get_hp
 export var _velocity:Vector2=Vector2.ZERO
+
+export (bool) var receives_knockback:bool=true
+export (bool) var knockback_modifier:float=1
 
 onready var sprite=$Sprite
 onready var collShape=$CollisionShape2D
@@ -44,9 +48,23 @@ func receive_damage(base_damage:int)->int:
 	var base=base_damage;
 	return base;
 
+func receive_knockback(dmg_source:Vector2, received_dmg:int):
+	if receives_knockback:
+		var knk_bck_dir=dmg_source.direction_to(self.position)
+		print(self.position," and ",dmg_source," else ",self.global_position)
+		var knk_strength=received_dmg*knockback_modifier
+		print(_velocity," pre")
+		self._velocity+=knk_bck_dir*knk_strength*10
+		
+		#self._velocity.y+=-400
+#		global_position+=knk_bck_dir*knk_strength
+		print(_velocity," post")
+
+
 func _on_Hurtbox_area_entered(hitbox):
 	var base=receive_damage(hitbox.damage);
 	self.hp-=base
+	receive_knockback(hitbox.global_position,base)
 	if(self.hp/self.hp_max<0.5):
 		self.scale.x=0.8
 		self.scale.y=0.8
@@ -54,6 +72,7 @@ func _on_Hurtbox_area_entered(hitbox):
 	
 	if hitbox.is_in_group("projectile"):
 		hitbox.destroy()
+
 
 
 

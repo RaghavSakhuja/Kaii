@@ -7,11 +7,11 @@
 [ext_resource path="res://assets/playerjump.png" type="Texture" id=5]
 [ext_resource path="res://Source/Objects/Projectiles/body_bullet.tscn" type="PackedScene" id=6]
 
-[sub_resource type="CircleShape2D" id=4]
-radius = 12.0416
-
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 32, 28.5 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 12.0416
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -272,30 +272,29 @@ B_Bullet = ExtResource( 6 )
 texture = ExtResource( 3 )
 hframes = 5
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="." index="1"]
-visible = false
-position = Vector2( 23, 23 )
-shape = SubResource( 4 )
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, 2.5 )
+shape = SubResource( 5 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="." index="2"]
-visible = false
-position = Vector2( 23, -19 )
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="." index="3"]
-visible = false
-position = Vector2( -23, 23 )
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="4"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="2"]
 visible = false
 position = Vector2( -25, -19 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D" parent="." index="5"]
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="." index="3"]
 visible = false
-position = Vector2( 0, 2.5 )
-shape = SubResource( 5 )
+position = Vector2( 23, 23 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." index="4"]
+visible = false
+position = Vector2( 23, -19 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." index="5"]
+visible = false
+position = Vector2( -23, 23 )
+shape = SubResource( 4 )
 
 [node name="AnimationPlayer" parent="." index="6"]
 autoplay = "idle"
@@ -323,6 +322,14 @@ shape = SubResource( 9 )
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Hurtbox" index="2"]
 position = Vector2( 24, 1 )
 shape = SubResource( 10 )
+
+[node name="Camera2D" type="Camera2D" parent="." index="8"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1720
+limit_smoothed = true
+smoothing_enabled = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
