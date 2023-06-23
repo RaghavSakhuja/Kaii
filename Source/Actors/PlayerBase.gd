@@ -6,6 +6,7 @@ export(PackedScene) var B_Bullet: PackedScene=preload("res://Source/Objects/Proj
 
 var facing=1;
 var start_new_anim=true
+var in_water:bool=false
 
 func get_input_dir()->Vector2:
 	var new_velocity:=Vector2()
@@ -15,6 +16,9 @@ func get_input_dir()->Vector2:
 	
 func _physics_process(delta:float)->void:
 	#print(_velocity)
+	if(in_water):
+		rejuvinate()
+	
 	var dir:=Vector2.ZERO
 	dir.x=get_input_dir().x
 	if dir!=Vector2.ZERO:
@@ -40,7 +44,7 @@ func _physics_process(delta:float)->void:
 		if start_new_anim:
 			animPlayer.play("idle")
 		
-
+	
 	move()
 
 func accelarate(dir:Vector2):
@@ -69,13 +73,35 @@ func throw():
 		_velocity+=direction*speed
 		_velocity.x=clamp(_velocity.x,-600,600)
 		bullet.rotation=(-1*direction).angle()
-		animPlayer.play("drying_"+str(3-currcount))
-		start_new_anim=0;
-		speed+=50
-		friction-=10
-		currcount-=1
+		if(!in_water):
+			dry()
+		
+func dry():
+	if(currcount<=2):
+			animPlayer.play("drying_"+str(3-currcount))
+			print(currcount," drying_"+str(3-currcount))
+			start_new_anim=0;
+			speed+=50
+			friction-=10
+			currcount-=1
+			print(speed," ",friction," ",currcount)
 		
 
+func rejuvinate():
+	if(currcount<2):
+		animPlayer.play("rejuvination_"+str(2-currcount))
+		start_new_anim=0
+		print(currcount," rejuvination_"+str(2-currcount))
+		speed-=(50)*(2-currcount)
+		friction+=10*(2-currcount)
+		currcount=limit
+		print(speed," ",friction," ",currcount)
+
+func enter_exit_water(flag:bool):
+	in_water=flag
+			
+	
+	
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	start_new_anim=1;

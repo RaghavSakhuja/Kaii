@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Source/Actors/Entity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/enemy.png" type="Texture" id=2]
@@ -15,9 +15,13 @@ resource_name = "idle"
 radius = 51.1566
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 47.0106
+radius = 48.0416
 
-[node name="EnemyBase" instance=ExtResource( 1 )]
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 22.0
+height = 68.0
+
+[node name="EnemyBase" groups=["enemy"] instance=ExtResource( 1 )]
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 4
 collision_mask = 23
@@ -28,12 +32,14 @@ speed = 250
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" parent="." index="2"]
 anims/idle = SubResource( 2 )
 
 [node name="Hurtbox" parent="." index="3"]
+visible = false
 collision_layer = 4
 collision_mask = 16
 
@@ -47,6 +53,11 @@ damage = 55
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox" index="1"]
+position = Vector2( 0, 24 )
+rotation = 1.5708
+shape = SubResource( 5 )
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]
