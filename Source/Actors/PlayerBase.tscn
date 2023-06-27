@@ -13,17 +13,6 @@ extents = Vector2( 32, 28.5 )
 [sub_resource type="CircleShape2D" id=4]
 radius = 12.0416
 
-[sub_resource type="CircleShape2D" id=8]
-radius = 36.0
-
-[sub_resource type="CapsuleShape2D" id=9]
-radius = 12.5
-height = 50.0
-
-[sub_resource type="CapsuleShape2D" id=10]
-radius = 13.5
-height = 50.0
-
 [sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
@@ -262,6 +251,17 @@ tracks/2/keys = {
 "values": [ 7 ]
 }
 
+[sub_resource type="CircleShape2D" id=8]
+radius = 36.0
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 12.5
+height = 50.0
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 13.5
+height = 50.0
+
 [node name="PlayerBase" groups=["player"] instance=ExtResource( 1 )]
 scale = Vector2( 0.8, 0.8 )
 collision_layer = 2
@@ -272,30 +272,47 @@ currcount = 2
 B_Bullet = ExtResource( 6 )
 
 [node name="Sprite" parent="." index="0"]
+self_modulate = Color( 0.588235, 0.588235, 0.588235, 1 )
 texture = ExtResource( 3 )
 hframes = 5
 
 [node name="CollisionShape2D" parent="." index="1"]
+visible = false
 position = Vector2( 0, 2.5 )
 shape = SubResource( 5 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="2"]
+visible = false
 position = Vector2( -25, -19 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="." index="3"]
+visible = false
 position = Vector2( 23, 23 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="." index="4"]
+visible = false
 position = Vector2( 23, -19 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="." index="5"]
+visible = false
 position = Vector2( -23, 23 )
 shape = SubResource( 4 )
 
-[node name="Hurtbox" parent="." index="6"]
+[node name="AnimationPlayer" parent="." index="6"]
+autoplay = "idle"
+anims/RESET = SubResource( 3 )
+anims/drying_1 = SubResource( 11 )
+anims/drying_2 = SubResource( 12 )
+anims/idle = SubResource( 2 )
+anims/jump = SubResource( 7 )
+anims/rejuvination_1 = SubResource( 13 )
+anims/rejuvination_2 = SubResource( 14 )
+anims/run = SubResource( 6 )
+
+[node name="Hurtbox" parent="." index="7"]
 visible = false
 collision_layer = 2
 collision_mask = 12
@@ -310,17 +327,6 @@ shape = SubResource( 9 )
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Hurtbox" index="2"]
 position = Vector2( 23.75, 1.19209e-07 )
 shape = SubResource( 10 )
-
-[node name="AnimationPlayer" parent="." index="7"]
-autoplay = "idle"
-anims/RESET = SubResource( 3 )
-anims/drying_1 = SubResource( 11 )
-anims/drying_2 = SubResource( 12 )
-anims/idle = SubResource( 2 )
-anims/jump = SubResource( 7 )
-anims/rejuvination_1 = SubResource( 13 )
-anims/rejuvination_2 = SubResource( 14 )
-anims/run = SubResource( 6 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="8"]
 offset = Vector2( 0, -100 )

@@ -24,22 +24,20 @@ height = 68.0
 [node name="EnemyBase" groups=["enemy"] instance=ExtResource( 1 )]
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 4
-collision_mask = 23
+collision_mask = 19
 script = ExtResource( 4 )
-speed = 250
+speed = 150
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-visible = false
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" parent="." index="2"]
 anims/idle = SubResource( 2 )
 
 [node name="Hurtbox" parent="." index="3"]
-visible = false
 collision_layer = 4
 collision_mask = 16
 
@@ -58,6 +56,12 @@ shape = SubResource( 4 )
 position = Vector2( 0, 24 )
 rotation = 1.5708
 shape = SubResource( 5 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="." index="5"]
+position = Vector2( 3.00001, -10 )
+scale = Vector2( 22.1, 18.8 )
+process_parent = true
+physics_process_parent = true
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

@@ -27,4 +27,3 @@ scale = Vector2( 11.45, 8.8 )
 
 [connection signal="area_entered" from="." to="." method="_on_body_bullet_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_bullet_body_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

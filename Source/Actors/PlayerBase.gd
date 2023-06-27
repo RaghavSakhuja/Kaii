@@ -15,7 +15,8 @@ func get_input_dir()->Vector2:
 	return new_velocity
 	
 func _physics_process(delta:float)->void:
-	#print(_velocity)
+	if(_velocity!=Vector2.ZERO):
+		print(_velocity)
 	if(in_water):
 		rejuvinate()
 	
@@ -67,11 +68,12 @@ func throw():
 		var bullet=B_Bullet.instance()
 		get_tree().current_scene.add_child(bullet)
 		bullet.global_position=self.global_position
+		bullet.global_position.y-=30
 		var direction=get_input_dir();
 		if(direction==Vector2.ZERO):
 			direction.x=facing;
-		_velocity+=direction*speed
-		_velocity.x=clamp(_velocity.x,-600,600)
+		_velocity+=direction*speed*0.9
+		_velocity.x=clamp(_velocity.x,-650,650)
 		bullet.rotation=(-1*direction).angle()
 		if(!in_water):
 			dry()
@@ -100,7 +102,8 @@ func rejuvinate():
 func enter_exit_water(flag:bool):
 	in_water=flag
 			
-	
+func die():
+	get_tree().change_scene("res://Source/Levels/screens/DeathScreen.tscn")	
 	
 
 func _on_AnimationPlayer_animation_finished(anim_name):

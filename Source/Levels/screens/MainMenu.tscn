@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/background.png" type="Texture" id=1]
+[ext_resource path="res://Source/userInterface/ChangeScreen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Source/userInterface/title.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Source/userInterface/Exit.tscn" type="PackedScene" id=5]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+
+[node name="title" parent="." instance=ExtResource( 4 )]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.363
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -109.0
+margin_top = 24.2
+margin_right = 138.0
+margin_bottom = 183.0
+
+[node name="Tutorial" parent="VBoxContainer" instance=ExtResource( 2 )]
+modulate = Color( 0.545098, 1, 0, 1 )
+margin_top = 0.0
+margin_bottom = 57.0
+text = "Tutorial"
+NextScene = "res://Source/Levels/tutorial.tscn"
+
+[node name="Play" parent="VBoxContainer" instance=ExtResource( 2 )]
+NextScene = "res://Source/Levels/LevelTemp.tscn"
+
+[node name="Exit" parent="VBoxContainer" instance=ExtResource( 5 )]

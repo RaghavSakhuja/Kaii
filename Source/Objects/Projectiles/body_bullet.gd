@@ -16,3 +16,4 @@ func _on_body_bullet_area_entered(area):
 func _on_body_bullet_body_entered(body):
 	print(body," body")
 	destroy()
+

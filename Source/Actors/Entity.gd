@@ -10,7 +10,7 @@ const FLOOR_NORMAL=Vector2.UP
 export(int) var Gravity=1000
 export(int) var ACC=40
 export(int) var speed=500
-export(int) var friction=50
+export(int) var friction=80
 export(int) var hp_max=100
 export(int) var hp= hp_max setget set_hp,get_hp
 export var _velocity:Vector2=Vector2.ZERO
@@ -39,6 +39,7 @@ func get_hp():
 
 func apply_grav()->void:
 		_velocity.y+=Gravity*get_physics_process_delta_time()
+		_velocity.y=clamp(_velocity.y,-550,550)
 		
 
 
@@ -54,7 +55,7 @@ func receive_knockback(dmg_source:Vector2, received_dmg:int):
 		print(self.position," and ",dmg_source," else ",self.global_position)
 		var knk_strength=received_dmg*knockback_modifier
 		print(_velocity," pre")
-		self._velocity+=knk_bck_dir*knk_strength*20
+		self._velocity+=knk_bck_dir*knk_strength*10
 		
 		#self._velocity.y+=-400
 #		global_position+=knk_bck_dir*knk_strength

@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Source/userInterface/ChangeScreen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Source/userInterface/title.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Source/userInterface/Exit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Source/userInterface/Retry.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Source/Levels/screens/PauseMenu.gd" type="Script" id=5]
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+
+[node name="pauseoverlay" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.270588 )
+
+[node name="title" parent="pauseoverlay" instance=ExtResource( 2 )]
+margin_left = -1.0
+margin_top = 57.0
+margin_right = -1.0
+margin_bottom = 205.0
+text = "Paused"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pauseoverlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -86.0
+margin_top = -91.0
+margin_right = 111.0
+margin_bottom = 167.0
+
+[node name="Retry" parent="pauseoverlay/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 0.0
+margin_right = 197.0
+margin_bottom = 57.0
+
+[node name="Main Menu" parent="pauseoverlay/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 87.0
+margin_right = 197.0
+margin_bottom = 144.0
+text = "Main Menu"
+NextScene = "res://Source/Levels/screens/MainMenu.tscn"
+
+[node name="Exit" parent="pauseoverlay/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 174.0
+margin_right = 197.0
+margin_bottom = 231.0
