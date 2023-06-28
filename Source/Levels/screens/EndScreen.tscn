@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/more fonts/Sniglet-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/more fonts/KiriFont.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Source/userInterface/Exit.gd" type="Script" id=3]
-[ext_resource path="res://Source/userInterface/ChangeScreen.gd" type="Script" id=4]
+[ext_resource path="res://Source/userInterface/Retry.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/background.png" type="Texture" id=5]
 [ext_resource path="res://Source/userInterface/ChangeScreen.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Source/userInterface/title.tscn" type="PackedScene" id=7]
@@ -36,17 +35,9 @@ expand = true
 stretch_mode = 1
 flip_v = true
 
-[node name="title" type="Label" parent="." instance=ExtResource( 7 )]
-anchor_right = 1.0
-margin_top = 45.0
-margin_bottom = 193.0
-grow_horizontal = 2
-grow_vertical = 2
-custom_colors/font_color = Color( 0.105882, 0.619608, 0, 1 )
+[node name="title" parent="." instance=ExtResource( 7 )]
 custom_fonts/font = SubResource( 1 )
 text = "You WOn!!"
-align = 1
-valign = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
@@ -54,31 +45,22 @@ anchor_top = 0.363
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -110.0
-margin_top = 44.2
+margin_top = -15.0
 margin_right = 137.0
 margin_bottom = 148.0
 
-[node name="MainMenu" type="Button" parent="VBoxContainer" instance=ExtResource( 6 )]
-modulate = Color( 0, 0.952941, 1, 1 )
-margin_right = 247.0
+[node name="Retry" parent="VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 0.0
 margin_bottom = 57.0
-size_flags_horizontal = 3
-size_flags_vertical = 2
+
+[node name="MainMenu" parent="VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 83.0
+margin_bottom = 140.0
 custom_fonts/font = SubResource( 3 )
 text = "Main Menu"
-script = ExtResource( 4 )
 NextScene = "res://Source/Levels/screens/MainMenu.tscn"
 
-[node name="Exit" type="Button" parent="VBoxContainer" instance=ExtResource( 9 )]
-modulate = Color( 1, 0, 0.494118, 1 )
-margin_top = 95.0
-margin_right = 247.0
-margin_bottom = 152.0
-size_flags_horizontal = 3
-size_flags_vertical = 2
+[node name="Exit" parent="VBoxContainer" instance=ExtResource( 9 )]
+margin_top = 166.0
+margin_bottom = 223.0
 custom_fonts/font = SubResource( 4 )
-text = "Exit"
-script = ExtResource( 3 )
-
-[connection signal="button_up" from="VBoxContainer/MainMenu" to="VBoxContainer/MainMenu" method="_on_Play_button_up"]
-[connection signal="button_up" from="VBoxContainer/Exit" to="VBoxContainer/Exit" method="_on_Exit_button_up"]

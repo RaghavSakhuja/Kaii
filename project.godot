@@ -24,6 +24,10 @@ config/name="plat"
 run/main_scene="res://Source/Levels/screens/MainMenu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Data="*res://Source/data.gd"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

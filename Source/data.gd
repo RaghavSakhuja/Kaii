@@ -1,10 +1,15 @@
-extends Button
+extends Node
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export (String,FILE )var NextScene: String 
+
+var level:int setget set_level
+var array=["res://Source/Levels/tutorial.tscn","res://Source/Levels/LevelTemp.tscn"]
+
+func set_level(val:int):
+	level=val;
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,12 +20,3 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
-
-func _on_Play_button_up():
-	get_tree().paused=false
-	var level=Data.array.find(NextScene)
-	if(level!=-1):
-		Data.set_level(level)
-	print(level)
-	get_tree().change_scene(NextScene)
