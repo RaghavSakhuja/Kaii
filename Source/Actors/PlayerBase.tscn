@@ -96,7 +96,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0.647059, 0.647059, 1 ), Color( 0.596078, 0.333333, 0.333333, 1 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=15]
 resource_name = "idle"
 length = 0.5
 loop = true
@@ -272,12 +272,10 @@ currcount = 2
 B_Bullet = ExtResource( 6 )
 
 [node name="Sprite" parent="." index="0"]
-self_modulate = Color( 0.588235, 0.588235, 0.588235, 1 )
 texture = ExtResource( 3 )
 hframes = 5
 
 [node name="CollisionShape2D" parent="." index="1"]
-visible = false
 position = Vector2( 0, 2.5 )
 shape = SubResource( 5 )
 
@@ -306,7 +304,7 @@ autoplay = "idle"
 anims/RESET = SubResource( 3 )
 anims/drying_1 = SubResource( 11 )
 anims/drying_2 = SubResource( 12 )
-anims/idle = SubResource( 2 )
+anims/idle = SubResource( 15 )
 anims/jump = SubResource( 7 )
 anims/rejuvination_1 = SubResource( 13 )
 anims/rejuvination_2 = SubResource( 14 )

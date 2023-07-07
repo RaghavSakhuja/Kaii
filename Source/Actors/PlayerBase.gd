@@ -4,6 +4,7 @@ export (int) var limit:int=2
 export (int) var currcount:int=2
 export(PackedScene) var B_Bullet: PackedScene=preload("res://Source/Objects/Projectiles/body_bullet.tscn")
 
+
 var facing=1;
 var start_new_anim=true
 var in_water:bool=false
@@ -54,7 +55,7 @@ func accelarate(dir:Vector2):
 func move():
 	apply_grav()
 	if(Input.is_action_just_pressed("move_up") && (is_on_floor())):
-		_velocity.y=-speed
+		_velocity.y=-speed*1.7
 		print("jumped1")
 	_velocity = move_and_slide(_velocity,FLOOR_NORMAL)
 
@@ -72,8 +73,8 @@ func throw():
 		var direction=get_input_dir();
 		if(direction==Vector2.ZERO):
 			direction.x=facing;
-		_velocity+=direction*speed*0.9
-		_velocity.x=clamp(_velocity.x,-650,650)
+		_velocity+=direction*speed*1
+		_velocity.x=clamp(_velocity.x,-800,800)
 		bullet.rotation=(-1*direction).angle()
 		if(!in_water):
 			dry()
@@ -108,3 +109,19 @@ func die():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	start_new_anim=1;
+
+func _on_Hurtbox_area_exited(area):
+	if(area.is_in_group("water") && self.is_in_group("player")):
+		print("water_out")
+		enter_exit_water(false)
+		return
+
+func _on_Hurtbox_area_entered(area):
+	print("IN")
+	print(area.name)
+	if(area.is_in_group("water") && self.is_in_group("player")):
+		print("water")
+		enter_exit_water(true)
+		return
+	else:
+		damaged(area)

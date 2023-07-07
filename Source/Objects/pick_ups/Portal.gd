@@ -1,7 +1,7 @@
 tool
 extends Area2D
 
-export var NextScene: PackedScene 
+export (String,FILE )var NextScene: String 
 
 onready var anim_player: AnimationPlayer= $AnimationPlayer
 
@@ -20,7 +20,11 @@ func _get_configuration_warning() -> String:
 func teleport():
 	anim_player.play("fade_end")
 	yield(anim_player,"animation_finished")
-	get_tree().change_scene_to(NextScene)
+	var level=Data.array.find(NextScene)
+	if(level!=-1):
+		Data.set_level(level)
+	print(level)
+	get_tree().change_scene(NextScene)
 
 func _process(delta):
 	if(inside):
